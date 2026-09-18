@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BLADE & GOLD | מספרת בוטיק לגברים</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Heebo & Assistant -->
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700;800&family=Heebo:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: {
+                            light: '#F3E5AB',
+                            DEFAULT: '#D4AF37',
+                            dark: '#AA7C11',
+                            hover: '#B89628'
+                        },
+                        darkBg: '#0F0F0F',
+                        darkCard: '#1A1A1A',
+                        darkElevated: '#252525'
+                    },
+                    fontFamily: {
+                        sans: ['Heebo', 'Assistant', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Heebo', sans-serif;
+            background-color: #0F0F0F;
+            color: #E5E5E5;
+        }
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #FFF099 0%, #D4AF37 50%, #AA7C11 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gold-border-glow {
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+        }
+        .gold-border-glow:hover {
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.4);
+        }
+        .glass-panel {
+            background: rgba(26, 26, 26, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+        }
+        .time-slot.selected {
+            background-color: #D4AF37;
+            color: #000;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body class="bg-darkBg text-gray-200 antialiased selection:bg-gold selection:text-black">
+
+    <!-- Navigation Bar -->
+    <header class="fixed top-0 left-0 right-0 z-40 glass-panel border-b border-gold/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 rounded-full border-2 border-gold flex items-center justify-center bg-black">
+                        <i class="fa-solid fa-[#D4AF37] fa-scissors text-xl text-gold"></i>
+                    </div>
+                    <div>
+                        <span class="text-2xl font-black tracking-wider gold-gradient-text block leading-none">BLADE & GOLD</span>
+                        <span class="text-xs text-gray-400 tracking-widest block uppercase font-light mt-1">HAIRCUT & SHAVE STUDIO</span>
+                    </div>
+                </div>
+
+                <!-- Desktop Menu -->
+                <nav class="hidden md:flex items-center space-x-8 space-x-reverse font-medium text-sm">
+                    <a href="#hero" class="hover:text-gold transition-colors py-2">דף הבית</a>
+                    <a href="#services" class="hover:text-gold transition-colors py-2">מחירון ושירותים</a>
+                    <a href="#gallery" class="hover:text-gold transition-colors py-2">גלריה</a>
+                    <a href="#barbers" class="hover:text-gold transition-colors py-2">הצוות שלנו</a>
+                    <a href="#reviews" class="hover:text-gold transition-colors py-2">המלצות</a>
+                    <a href="#contact" class="hover:text-gold transition-colors py-2">סניף ושעות</a>
+                </nav>
+
+                <!-- Book Now Action Button -->
+                <div class="hidden sm:flex items-center gap-4">
+                    <button onclick="openBookingModal()" class="bg-gradient-to-r from-gold to-gold-dark text-black font-bold px-6 py-2.5 rounded-full hover:brightness-110 transition-all duration-300 shadow-lg flex items-center gap-2 transform hover:-translate-y-0.5">
+                        <i class="fa-solid fa-calendar-check text-base"></i>
+                        <span>קביעת תור מהירה</span>
+                    </button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobileMenuBtn" onclick="toggleMobileMenu()" class="text-gray-300 hover:text-gold text-2xl p-2 focus:outline-none">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobileMenu" class="hidden md:hidden bg-darkCard border-b border-gold/20 px-4 pt-2 pb-6 space-y-3">
+            <a href="#hero" onclick="toggleMobileMenu()" class="block py-2 text-gray-200 hover:text-gold border-b border-gray-800">דף הבית</a>
+            <a href="#services" onclick="toggleMobileMenu()" class="block py-2 text-gray-200 hover:text-gold border-b border-gray-800">מחירון ושירותים</a>
+            <a href="#gallery" onclick="toggleMobileMenu()" class="block py-2 text-gray-200 hover:text-gold border-b border-gray-800">גלריה</a>
+            <a href="#barbers" onclick="toggleMobileMenu()" class="block py-2 text-gray-200 hover:text-gold border-b border-gray-800">הצוות שלנו</a>
+            <a href="#reviews" onclick="toggleMobileMenu()" class="block py-2 text-gray-200 hover:text-gold border-b border-gray-800">המלצות</a>
+            <a href="#contact" onclick="toggleMobileMenu()" class="block py-2 text-gray-200 hover:text-gold border-b border-gray-800">סניף ושעות</a>
+            <button onclick="toggleMobileMenu(); openBookingModal();" class="w-full mt-4 bg-gold text-black font-bold py-3 rounded-xl flex items-center justify-center gap-2">
+                <i class="fa-solid fa-calendar-check"></i>
+                <span>קביעת תור בווצאפ</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero" class="relative min-h-screen flex items-center pt-24 pb-16 overflow-hidden">
+        <!-- Hero Background Overlay -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?q=80&w=1920&auto=format&fit=crop" 
+                 alt="Luxury Barber Shop Interior" 
+                 class="w-full h-full object-cover object-center opacity-25 scale-105 transform hover:scale-100 transition-transform duration-1000">
+            <div class="absolute inset-0 bg-gradient-to-t from-darkBg via-darkBg/80 to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-r from-darkBg via-transparent to-darkBg/90"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-right">
+                    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gold/10 border border-gold/30 text-gold text-sm font-semibold">
+                        <i class="fa-solid fa-crown"></i>
+                        <span>חווית תספורת יוקרתית ברמה אחרת</span>
+                    </div>
+                    <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-white leading-tight">
+                        חיתוך מדויק.<br>
+                        <span class="gold-gradient-text">סטייל בלתי מתפשר.</span>
+                    </h1>
+                    <p class="text-lg sm:text-xl text-gray-300 font-light max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                        במספרת BLADE & GOLD אנחנו משלבים מסורת קלאסית עם הטרנדים החדשניים ביותר.
+                        צוות הספרים המוביל שלנו מחכה מעניק לך חוויה מעצבת, עיצוב זקן, וטיפוח פרימיום.
+                    </p>
+                    
+                    <div class="pt-4 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                        <button onclick="openBookingModal()" class="bg-gradient-to-r from-gold to-gold-dark text-black font-extrabold text-lg px-8 py-4 rounded-xl hover:brightness-110 transition-all duration-300 shadow-xl flex items-center justify-center gap-3 transform hover:-translate-y-1">
+                            <i class="fa-brands fa-whatsapp text-2xl"></i>
+                            <span>הזמן תור עכשיו</span>
+                        </button>
+                        <a href="#services" class="border border-gold/40 text-gold hover:bg-gold/10 font-semibold text-lg px-8 py-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-2">
+                            <span>צפה במחירון</span>
+                            <i class="fa-solid fa-arrow-left text-sm"></i>
+                        </a>
+                    </div>
+
+                    <!-- Trust Stats -->
+                    <div class="pt-8 grid grid-cols-3 gap-4 border-t border-gray-800/80 max-w-lg mx-auto lg:mx-0">
+                        <div>
+                            <span class="block text-2xl sm:text-3xl font-extrabold gold-gradient-text">+10</span>
+                            <span class="text-xs text-gray-400">שנות ניסיון</span>
+                        </div>
+                        <div>
+                            <span class="block text-2xl sm:text-3xl font-extrabold gold-gradient-text">4.9 ★</span>
+                            <span class="text-xs text-gray-400">דירוג לקוחות</span>
+                        </div>
+                        <div>
+                            <span class="block text-2xl sm:text-3xl font-extrabold gold-gradient-text">+5,000</span>
+                            <span class="text-xs text-gray-400">לקוחות מרוצים</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hero Feature Cards -->
+                <div class="lg:col-span-5 relative hidden lg:block">
+                    <div class="relative mx-auto max-w-md">
+                        <div class="rounded-2xl overflow-hidden border border-gold/30 gold-border-glow shadow-2xl relative">
+                            <img src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?q=80&w=800&auto=format&fit=crop" alt="Barber cutting hair" class="w-full h-[480px] object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
+                            <div class="absolute bottom-6 right-6 left-6 p-4 glass-panel rounded-xl">
+                                <p class="text-xs text-gold uppercase tracking-wider font-semibold">הסטנדרט הגבוה ביותר</p>
+                                <p class="text-white font-bold text-lg mt-1">טיפוח, דיוק ואווירה ייחודית בכל ביקור</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-darkCard/50 border-y border-gold/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs uppercase tracking-widest text-gold font-bold mb-2">תפריט טיפולים</h2>
+                <p class="text-3xl sm:text-4xl font-extrabold text-white">המחירון והשירותים שלנו</p>
+                <div class="w-20 h-1 bg-gold mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service Item 1 -->
+                <div class="glass-panel p-6 rounded-2xl border border-gold/10 hover:border-gold/40 transition-all duration-300 group hover:-translate-y-1">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="w-12 h-12 rounded-xl bg-gold/10 text-gold flex items-center justify-center text-xl group-hover:bg-gold group-hover:text-black transition-colors duration-300">
+                            <i class="fa-solid fa-scissors"></i>
+                        </div>
+                        <span class="text-2xl font-black text-gold">₪80</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">תספורת גברים פרימיום</h3>
+                    <p class="text-gray-400 text-sm mb-4 leading-relaxed">תספורת מעוצבת אישית בהתאמה למבנה הפנים, כולל חפוף, עיצוב ושימוש במוצרי איכות.</p>
+                    <button onclick="selectServiceAndBook('תספורת גברים פרימיום')" class="w-full py-2.5 rounded-lg border border-gold/30 text-gold font-semibold text-sm hover:bg-gold hover:text-black transition-all">
+                        להזמנת תור
+                    </button>
+                </div>
+
+                <!-- Service Item 2 -->
+                <div class="glass-panel p-6 rounded-2xl border border-gold/10 hover:border-gold/40 transition-all duration-300 group hover:-translate-y-1">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="w-12 h-12 rounded-xl bg-gold/10 text-gold flex items-center justify-center text-xl group-hover:bg-gold group-hover:text-black transition-colors duration-300">
+                            <i class="fa-solid fa-[#D4AF37] fa-user-ninja text-gold group-hover:text-black"></i>
+                        </div>
+                        <span class="text-2xl font-black text-gold">₪50</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">עיצוב ופיסול זקן</h3>
+                    <p class="text-gray-400 text-sm mb-4 leading-relaxed">סידור ועיצוב הזקן בדיוק מילימטרי, יישור קווים בתיעוד תער, שמנים ומגבת חמה.</p>
+                    <button onclick="selectServiceAndBook('עיצוב ופיסול זקן')" class="w-full py-2.5 rounded-lg border border-gold/30 text-gold font-semibold text-sm hover:bg-gold hover:text-black transition-all">
+                        להזמנת תור
+                    </button>
+                </div>
+
+                <!-- Service Item 3 (VIP Combo) -->
+                <div class="glass-panel p-6 rounded-2xl border-2 border-gold gold-border-glow transition-all duration-300 group hover:-translate-y-1 relative overflow-hidden">
+                    <div class="absolute top-3 left-3 bg-gold text-black text-xs font-bold px-3 py-1 rounded-full uppercase">פופולרי</div>
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="w-12 h-12 rounded-xl bg-gold text-black flex items-center justify-center text-xl">
+                            <i class="fa-solid fa-gem"></i>
+                        </div>
+                        <span class="text-2xl font-black text-gold">₪120</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">חבילת VIP שלמה</h3>
+                    <p class="text-gray-400 text-sm mb-4 leading-relaxed">תספורת מלאה + פיסול זקן + טיפול פנים מרענן במגבת חמה + עיצוב גבות וניקוי.</p>
+                    <button onclick="selectServiceAndBook('חבילת VIP שלמה')" class="w-full py-2.5 rounded-lg bg-gold text-black font-bold text-sm hover:brightness-110 transition-all">
+                        להזמנת VIP
+                    </button>
+                </div>
+
+                <!-- Service Item 4 -->
+                <div class="glass-panel p-6 rounded-2xl border border-gold/10 hover:border-gold/40 transition-all duration-300 group hover:-translate-y-1">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="w-12 h-12 rounded-xl bg-gold/10 text-gold flex items-center justify-center text-xl group-hover:bg-gold group-hover:text-black transition-colors duration-300">
+                            <i class="fa-solid fa-child"></i>
+                        </div>
+                        <span class="text-2xl font-black text-gold">₪60</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">תספורת ילדים / נוער</h3>
+                    <p class="text-gray-400 text-sm mb-4 leading-relaxed">תספורת קולית ועדכנית לילדים באווירה סבלנית, כיפית ומקצועית במיוחד.</p>
+                    <button onclick="selectServiceAndBook('תספורת ילדים')" class="w-full py-2.5 rounded-lg border border-gold/30 text-gold font-semibold text-sm hover:bg-gold hover:text-black transition-all">
+                        להזמנת תור
+                    </button>
+                </div>
+
+                <!-- Service Item 5 -->
+                <div class="glass-panel p-6 rounded-2xl border border-gold/10 hover:border-gold/40 transition-all duration-300 group hover:-translate-y-1">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="w-12 h-12 rounded-xl bg-gold/10 text-gold flex items-center justify-center text-xl group-hover:bg-gold group-hover:text-black transition-colors duration-300">
+                            <i class="fa-solid fa-spa"></i>
+                        </div>
+                        <span class="text-2xl font-black text-gold">₪70</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">טיפול פנים וניקוי שחורים</h3>
+                    <p class="text-gray-400 text-sm mb-4 leading-relaxed">טיפול פנים עמוק, פילינג, מסיכת זהב והזנת העור במעטפת ספא מרגיעה לגבר.</p>
+                    <button onclick="selectServiceAndBook('טיפול פנים וניקוי שחורים')" class="w-full py-2.5 rounded-lg border border-gold/30 text-gold font-semibold text-sm hover:bg-gold hover:text-black transition-all">
+                        להזמנת תור
+                    </button>
+                </div>
+
+                <!-- Service Item 6 -->
+                <div class="glass-panel p-6 rounded-2xl border border-gold/10 hover:border-gold/40 transition-all duration-300 group hover:-translate-y-1">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="w-12 h-12 rounded-xl bg-gold/10 text-gold flex items-center justify-center text-xl group-hover:bg-gold group-hover:text-black transition-colors duration-300">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        </div>
+                        <span class="text-2xl font-black text-gold">₪150</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">החלקה ושיקום השיער</h3>
+                    <p class="text-gray-400 text-sm mb-4 leading-relaxed">החלקה אורגנית מקצועית באישור משרד הבריאות לשמירה על שיער חלק ובריא.</p>
+                    <button onclick="selectServiceAndBook('החלקה ושיקום השיער')" class="w-full py-2.5 rounded-lg border border-gold/30 text-gold font-semibold text-sm hover:bg-gold hover:text-black transition-all">
+                        להזמנת תור
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs uppercase tracking-widest text-gold font-bold mb-2">תיק עבודות</h2>
+                <p class="text-3xl sm:text-4xl font-extrabold text-white">העבודות והסטייל שלנו</p>
+                <div class="w-20 h-1 bg-gold mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="group relative overflow-hidden rounded-2xl h-72 border border-gold/20">
+                    <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?q=80&w=600&auto=format&fit=crop" alt="Haircut Style 1" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                        <span class="text-gold font-bold text-sm">Fade מדויק + עיצוב זקן</span>
+                    </div>
+                </div>
+                <div class="group relative overflow-hidden rounded-2xl h-72 border border-gold/20">
+                    <img src="https://images.unsplash.com/photo-1605497788044-5a32c7078486?q=80&w=600&auto=format&fit=crop" alt="Haircut Style 2" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                        <span class="text-gold font-bold text-sm">סטייל קלאסי מודרני</span>
+                    </div>
+                </div>
+                <div class="group relative overflow-hidden rounded-2xl h-72 border border-gold/20">
+                    <img src="https://images.unsplash.com/photo-1517832606299-7ae9b720a186?q=80&w=600&auto=format&fit=crop" alt="Haircut Style 3" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                        <span class="text-gold font-bold text-sm">עיצוב זקן פרימיום</span>
+                    </div>
+                </div>
+                <div class="group relative overflow-hidden rounded-2xl h-72 border border-gold/20">
+                    <img src="https://images.unsplash.com/photo-1622286342621-4bd786c2447c?q=80&w=600&auto=format&fit=crop" alt="Haircut Style 4" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                        <span class="text-gold font-bold text-sm">תספורת טקסטורה חדשנית</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Barbers Section -->
+    <section id="barbers" class="py-20 bg-darkCard/50 border-t border-gold/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs uppercase tracking-widest text-gold font-bold mb-2">מומחים בסטייל</h2>
+                <p class="text-3xl sm:text-4xl font-extrabold text-white">פגוש את צוות הספרים</p>
+                <div class="w-20 h-1 bg-gold mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Barber 1 -->
+                <div class="glass-panel rounded-2xl overflow-hidden border border-gold/10 text-center p-6 group">
+                    <div class="w-32 h-32 mx-auto rounded-full overflow-hidden border-2 border-gold mb-4 group-hover:scale-105 transition-transform duration-300">
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=400&auto=format&fit=crop" alt="Barber Master" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-xl font-bold text-white">אלכס "המאסטר"</h3>
+                    <p class="text-gold text-sm font-medium mb-3">ספר ראשי ומייסד</p>
+                    <p class="text-gray-400 text-xs mb-4">מומחה בתספורות קלאסיות, תספורות פייד מורכבות ועיצוב זקן מוקפד.</p>
+                    <button onclick="selectBarberAndBook('אלכס Master')" class="text-xs border border-gold/30 text-gold hover:bg-gold hover:text-black py-2 px-4 rounded-lg font-semibold transition-all">
+                        קבע תור אצל אלכס
+                    </button>
+                </div>
+
+                <!-- Barber 2 -->
+                <div class="glass-panel rounded-2xl overflow-hidden border border-gold/10 text-center p-6 group">
+                    <div class="w-32 h-32 mx-auto rounded-full overflow-hidden border-2 border-gold mb-4 group-hover:scale-105 transition-transform duration-300">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&auto=format&fit=crop" alt="Barber Specialist" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-xl font-bold text-white">דניאל</h3>
+                    <p class="text-gold text-sm font-medium mb-3">מעצב טרנדים וזקנים</p>
+                    <p class="text-gray-400 text-xs mb-4">מתמחה בסטיילינג מודרני, גילוחים מסורתיים במגבות חמות וקווי מתאר נקיים.</p>
+                    <button onclick="selectBarberAndBook('דניאל')" class="text-xs border border-gold/30 text-gold hover:bg-gold hover:text-black py-2 px-4 rounded-lg font-semibold transition-all">
+                        קבע תור אצל דניאל
+                    </button>
+                </div>
+
+                <!-- Barber 3 -->
+                <div class="glass-panel rounded-2xl overflow-hidden border border-gold/10 text-center p-6 group">
+                    <div class="w-32 h-32 mx-auto rounded-full overflow-hidden border-2 border-gold mb-4 group-hover:scale-105 transition-transform duration-300">
+                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=400&auto=format&fit=crop" alt="Hair Stylist" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-xl font-bold text-white">עומר</h3>
+                    <p class="text-gold text-sm font-medium mb-3">מומחה תספורות וטיפולים</p>
+                    <p class="text-gray-400 text-xs mb-4">מומחה לתספורות ילדים ונוער, החלקות אורגניות וטיפולי שיקום שיער.</p>
+                    <button onclick="selectBarberAndBook('עומר')" class="text-xs border border-gold/30 text-gold hover:bg-gold hover:text-black py-2 px-4 rounded-lg font-semibold transition-all">
+                        קבע תור אצל עומר
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section id="reviews" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs uppercase tracking-widest text-gold font-bold mb-2">מה הלקוחות אומרים</h2>
+                <p class="text-3xl sm:text-4xl font-extrabold text-white">חוויות של לקוחות מרוצים</p>
+                <div class="w-20 h-1 bg-gold mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="glass-panel p-6 rounded-2xl border border-gold/10 relative">
+                    <div class="text-gold mb-3 flex gap-1">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-4 leading-relaxed">"המספרה הכי מקצועית שיצא לי להיות בה. יחס אישי, ירידה לפרטים הקטנים ביותר והקפה הכי טוב בעיר. לא מחליף אותם!"</p>
+                    <div class="font-bold text-white text-sm">יוסי אברהם</div>
+                    <div class="text-xs text-gray-500">לקוח קבוע 3 שנים</div>
+                </div>
+
+                <div class="glass-panel p-6 rounded-2xl border border-gold/10 relative">
+                    <div class="text-gold mb-3 flex gap-1">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-4 leading-relaxed">"אלכס ספר מקצוען ברמות! עיצוב הזקן יצא מדויק בדיוק כפי שרציתי. חוויית הווצאפ לקביעת התורים מאוד נוחה ומהירה."</p>
+                    <div class="font-bold text-white text-sm">תומר לוי</div>
+                    <div class="text-xs text-gray-500">לקוח מרוצה</div>
+                </div>
+
+                <div class="glass-panel p-6 rounded-2xl border border-gold/10 relative">
+                    <div class="text-gold mb-3 flex gap-1">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-4 leading-relaxed">"אווירה של מספרת פרימיום בחו"ל. הכל נקי, מדויק ומזמין. התור מתחיל בול בזמן שנקבע. ממליץ בחום!"</p>
+                    <div class="font-bold text-white text-sm">עמית כהן</div>
+                    <div class="text-xs text-gray-500">לקוח חדש</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact & Opening Hours Section -->
+    <section id="contact" class="py-20 bg-darkCard/50 border-t border-gold/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                
+                <!-- Info & Hours -->
+                <div class="space-y-6">
+                    <div>
+                        <h2 class="text-xs uppercase tracking-widest text-gold font-bold mb-2">צור קשר ומיקום</h2>
+                        <h3 class="text-3xl sm:text-4xl font-extrabold text-white">בוא לבקר אותנו במספרה</h3>
+                    </div>
+
+                    <div class="space-y-4 pt-2">
+                        <div class="flex items-center gap-4 p-4 rounded-xl glass-panel">
+                            <div class="w-12 h-12 rounded-lg bg-gold/10 text-gold flex items-center justify-center text-xl shrink-0">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white">כתובת המספרה</h4>
+                                <p class="text-gray-400 text-sm">רחוב דיזנגוף 150, תל אביב</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-4 p-4 rounded-xl glass-panel">
+                            <div class="w-12 h-12 rounded-lg bg-gold/10 text-gold flex items-center justify-center text-xl shrink-0">
+                                <i class="fa-brands fa-whatsapp"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white">טלפון / וואצאפ להזמנות</h4>
+                                <p class="text-gray-400 text-sm">053-9285366</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-4 p-4 rounded-xl glass-panel">
+                            <div class="w-12 h-12 rounded-lg bg-gold/10 text-gold flex items-center justify-center text-xl shrink-0">
+                                <i class="fa-solid fa-clock"></i>
+                            </div>
+                            <div class="w-full">
+                                <h4 class="font-bold text-white mb-1">שעות פעילות</h4>
+                                <div class="text-xs text-gray-400 space-y-1">
+                                    <div class="flex justify-between"><span>ראשון - חמישי:</span> <span>09:00 - 20:00</span></div>
+                                    <div class="flex justify-between"><span>שישי:</span> <span>08:30 - 15:00</span></div>
+                                    <div class="flex justify-between"><span>שבת:</span> <span class="text-gold">סגור</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Call to Action Banner -->
+                <div class="glass-panel p-8 rounded-3xl border-2 border-gold/30 text-center relative overflow-hidden flex flex-col items-center justify-center min-h-[380px]">
+                    <div class="w-20 h-20 rounded-full bg-gold/20 text-gold flex items-center justify-center text-3xl mb-6 border border-gold/40">
+                        <i class="fa-solid fa-scissors"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-2">מוכן לשדרג את הלוק שלך?</h3>
+                    <p class="text-gray-400 text-sm mb-6 max-w-sm">בלחיצת כפתור אחת התור שלך נקבע ונשלח ישירות לווצאפ המספרה!</p>
+                    <button onclick="openBookingModal()" class="bg-gold text-black font-extrabold text-lg px-8 py-3.5 rounded-xl hover:brightness-110 transition-all shadow-xl flex items-center gap-3">
+                        <i class="fa-brands fa-whatsapp text-xl"></i>
+                        <span>לקביעת תור בווצאפ עכשיו</span>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black py-8 border-t border-gray-900 text-center text-xs text-gray-500">
+        <div class="max-w-7xl mx-auto px-4">
+            <p>© 2026 BLADE & GOLD Barbershop. כל הזכויות שמורות.</p>
+            <p class="mt-2 text-gray-600">עיצוב ופיתוח יוקרתי למספרות | הזמנות בוואצאפ: 053-9285366</p>
+        </div>
+    </footer>
+
+    <!-- BOOKING MODAL -->
+    <div id="bookingModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+        <div class="glass-panel w-full max-w-xl rounded-3xl border border-gold/40 p-6 sm:p-8 relative max-h-[90vh] overflow-y-auto shadow-2xl">
+            <!-- Close Button -->
+            <button onclick="closeBookingModal()" class="absolute top-4 left-4 text-gray-400 hover:text-white text-2xl w-10 h-10 rounded-full flex items-center justify-center bg-black/40">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <!-- Modal Header -->
+            <div class="text-center mb-6">
+                <div class="inline-flex p-3 rounded-full bg-gold/10 text-gold mb-2 border border-gold/30">
+                    <i class="fa-solid fa-calendar-days text-2xl"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-white">קביעת תור בווצאפ</h3>
+                <p class="text-xs text-gray-400 mt-1">בחר את פרטי התור והם ישלחו ישירות למספרה</p>
+            </div>
+
+            <!-- Form -->
+            <form id="bookingForm" onsubmit="submitBooking(event)" class="space-y-4">
+                
+                <!-- Select Service -->
+                <div>
+                    <label class="block text-xs font-bold text-gold uppercase mb-1">בחר שירות</label>
+                    <select id="serviceSelect" class="w-full bg-darkElevated border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold transition-colors" required>
+                        <option value="תספורת גברים פרימיום (₪80)">תספורת גברים פרימיום - ₪80</option>
+                        <option value="עיצוב ופיסול זקן (₪50)">עיצוב ופיסול זקן - ₪50</option>
+                        <option value="חבילת VIP שלמה (₪120)">חבילת VIP שלמה - ₪120</option>
+                        <option value="תספורת ילדים (₪60)">תספורת ילדים / נוער - ₪60</option>
+                        <option value="טיפול פנים וניקוי שחורים (₪70)">טיפול פנים וניקוי שחורים - ₪70</option>
+                        <option value="החלקה ושיקום השיער (₪150)">החלקה ושיקום השיער - ₪150</option>
+                    </select>
+                </div>
+
+                <!-- Select Barber -->
+                <div>
+                    <label class="block text-xs font-bold text-gold uppercase mb-1">בחר ספר מועדף</label>
+                    <select id="barberSelect" class="w-full bg-darkElevated border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold transition-colors" required>
+                        <option value="איש צוות פנוי ראשון">איש צוות פנוי ראשון</option>
+                        <option value="אלכס Master">אלכס "המאסטר"</option>
+                        <option value="דניאל">דניאל</option>
+                        <option value="עומר">עומר</option>
+                    </select>
+                </div>
+
+                <!-- Date & Time Row -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-gold uppercase mb-1">תאריך מבוקש</label>
+                        <input type="date" id="dateInput" class="w-full bg-darkElevated border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold transition-colors" required>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gold uppercase mb-1">שעה מבוקשת</label>
+                        <select id="timeSelect" class="w-full bg-darkElevated border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold transition-colors" required>
+                            <option value="09:00">09:00</option>
+                            <option value="10:00">10:00</option>
+                            <option value="11:00">11:00</option>
+                            <option value="12:00">12:00</option>
+                            <option value="13:00">13:00</option>
+                            <option value="14:00">14:00</option>
+                            <option value="15:00">15:00</option>
+                            <option value="16:00">16:00</option>
+                            <option value="17:00">17:00</option>
+                            <option value="18:00">18:00</option>
+                            <option value="19:00">19:00</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Client Name & Phone -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-gold uppercase mb-1">שם מלא</label>
+                        <input type="text" id="nameInput" placeholder="הכנס את שמך" class="w-full bg-darkElevated border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold transition-colors" required>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gold uppercase mb-1">מספר טלפון</label>
+                        <input type="tel" id="phoneInput" placeholder="050-0000000" class="w-full bg-darkElevated border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold transition-colors" required>
+                    </div>
+                </div>
+
+                <!-- Notes -->
+                <div>
+                    <label class="block text-xs font-bold text-gold uppercase mb-1">הערות / בקשות מיוחדות (אופציונלי)</label>
+                    <textarea id="notesInput" rows="2" placeholder="למשל: תספורת ראשונה, בקשה מיוחדת..." class="w-full bg-darkElevated border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold transition-colors resize-none"></textarea>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="w-full mt-2 bg-gradient-to-r from-gold to-gold-dark text-black font-extrabold py-4 rounded-xl hover:brightness-110 transition-all flex items-center justify-center gap-3 shadow-lg text-base">
+                    <i class="fa-brands fa-whatsapp text-2xl"></i>
+                    <span>שלא תפספס! שלח בקשת תור בווצאפ</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- JavaScript Functions -->
+    <script>
+        // Set Default Date to Today
+        document.addEventListener('DOMContentLoaded', () => {
+            const dateInput = document.getElementById('dateInput');
+            if (dateInput) {
+                const today = new Date().toISOString().split('T')[0];
+                dateInput.min = today;
+                dateInput.value = today;
+            }
+        });
+
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Open Booking Modal
+        function openBookingModal() {
+            document.getElementById('bookingModal').classList.remove('hidden');
+        }
+
+        // Close Booking Modal
+        function closeBookingModal() {
+            document.getElementById('bookingModal').classList.add('hidden');
+        }
+
+        // Select Service from Card
+        function selectServiceAndBook(serviceName) {
+            const select = document.getElementById('serviceSelect');
+            for (let i = 0; i < select.options.length; i++) {
+                if (select.options[i].value.includes(serviceName)) {
+                    select.selectedIndex = i;
+                    break;
+                }
+            }
+            openBookingModal();
+        }
+
+        // Select Barber from Card
+        function selectBarberAndBook(barberName) {
+            const select = document.getElementById('barberSelect');
+            for (let i = 0; i < select.options.length; i++) {
+                if (select.options[i].value.includes(barberName)) {
+                    select.selectedIndex = i;
+                    break;
+                }
+            }
+            openBookingModal();
+        }
+
+        // Submit Booking to WhatsApp Number: 0539285366
+        function submitBooking(event) {
+            event.preventDefault();
+
+            const service = document.getElementById('serviceSelect').value;
+            const barber = document.getElementById('barberSelect').value;
+            const date = document.getElementById('dateInput').value;
+            const time = document.getElementById('timeSelect').value;
+            const name = document.getElementById('nameInput').value;
+            const phone = document.getElementById('phoneInput').value;
+            const notes = document.getElementById('notesInput').value;
+
+            // Target Israeli phone number without leading 0 with country code 972
+            const targetPhoneNumber = "972539285366";
+
+            // Format WhatsApp Message
+            let message = `שלום BLADE & GOLD! ✂️\n`;
+            message += `אני מעוניין לקבוע תור במספרה:\n\n`;
+            message += `👤 *שם לקוח:* ${name}\n`;
+            message += `📞 *טלפון:* ${phone}\n`;
+            message += `💈 *שירות:* ${service}\n`;
+            message += `✂️ *ספר מועדף:* ${barber}\n`;
+            message += `📅 *תאריך:* ${date}\n`;
+            message += `⏰ *שעה:* ${time}\n`;
+            
+            if (notes.trim() !== '') {
+                message += `📝 *הערות:* ${notes}\n`;
+            }
+
+            message += `\nאשמח לאישור התור. תודה!`;
+
+            // Encode for URL
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappUrl = `https://wa.me/${targetPhoneNumber}?text=${encodedMessage}`;
+
+            // Open WhatsApp Web/App
+            window.open(whatsappUrl, '_blank');
+
+            // Close Modal
+            closeBookingModal();
+        }
+    </script>
+</body>
+</html>
